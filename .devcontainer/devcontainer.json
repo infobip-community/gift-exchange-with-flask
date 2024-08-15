@@ -1,0 +1,40 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "gift-exchange-with-flask-devcontainer",
+	"image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+
+	// See https://containers.dev/implementors/features/
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    },
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+			],
+			// Set *default* container specific settings.json values on container create.
+			"settings": { 
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.linting.pylintArgs": [
+					"--disable=C0114,C0115,C0116"
+				]
+			}
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [5000, 50505],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "python3 -m pip install -r requirements.txt",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}
