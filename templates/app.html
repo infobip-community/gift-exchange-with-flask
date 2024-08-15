@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Gift Exchange App</title>
+        <link rel="icon" type="image/favicon" href="https://avatars.githubusercontent.com/u/1288491">
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <form action="{{ url_for('index')}}" method="POST">
+            <p><input type="text" name="name" placeholder="Enter your name here"></p>
+            <p><input type="tel" name="number" placeholder="Enter your phone number here"></p>
+            <p><button type="submit"><p>Add me to the gift exchange!</p></button></p>
+        </form>
+    </body>
+ </html>
