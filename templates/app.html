@@ -5,6 +5,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap" rel="stylesheet">
     </head>
     <body>
+        {% with msg = get_flashed_messages() %}
+            {% if msg %}
+                {% for message in msg %}
+                    <strong>{{ message }}</strong>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form action="{{ url_for('index')}}" method="POST">
             <p><input type="text" name="name" placeholder="Enter your name here"></p>
             <p><input type="tel" name="number" placeholder="Enter your phone number here"></p>
