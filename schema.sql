@@ -4,5 +4,6 @@ CREATE TABLE people (
     name TEXT NOT NULL,
     gift_bought INTEGER,
     verified INTEGER,
+    verification_code TEXT,
     giftee INT REFERENCES people(id)
 );
