@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Gift Exchange App</title>
+        <link rel="icon" type="image/favicon" href="https://avatars.githubusercontent.com/u/1288491">
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        {% with msg = get_flashed_messages() %}
+            {% if msg %}
+                {% for message in msg %}
+                    <strong>{{ message }}</strong>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('verify')}}" method="POST">
+            <p><input type="text" name="name" placeholder="Enter your name here"></p>
+            <p><input type="tel" name="number" placeholder="Enter your phone number here"></p>
+            <p><input type="number" name="pin" placeholder="Enter your PIN code here"></p>
+            <p><button type="submit"><p>Verify my number!</p></button></p>
+        </form>
+    </body>
+ </html>
