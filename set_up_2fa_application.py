@@ -1,4 +1,7 @@
 from infobip_channels.sms.channel import SMSChannel
+from dotenv import load_dotenv
+
+load_dotenv()
 
 channel = SMSChannel.from_env()
 
@@ -19,7 +22,7 @@ response = channel.create_tfa_application(
 
 response = channel.get_tfa_applications()
 application_id = response.list[0].application_id
-print(application_id)
+print("Application ID: ", application_id)
 
 response = channel.create_tfa_message_template(
     application_id,
@@ -34,5 +37,6 @@ response = channel.create_tfa_message_template(
             "speechRate": 1,
     }
 )
-template_id = response.list[0].message_id
-print(template_id)
+
+template_id = response.message_id
+print("Template ID: ", template_id)
