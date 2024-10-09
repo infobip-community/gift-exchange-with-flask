@@ -1,13 +1,16 @@
 import sqlite3
 import os
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, flash
 from infobip_channels.sms.channel import SMSChannel
 
 app = Flask(__name__)
 
-app.secret_key = "secret key"
-tfa_application_id = os.environ['TFA_APP_ID']
-tfa_template_id = os.environ['TFA_TEMPLATE_ID']
+load_dotenv()
+
+app.secret_key = os.getenv('IB_API_KEY')
+tfa_application_id = os.getenv('TFA_APP_ID')
+tfa_template_id = os.getenv('TFA_TEMPLATE_ID')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
