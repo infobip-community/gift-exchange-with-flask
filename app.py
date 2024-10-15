@@ -101,3 +101,61 @@ def verify_number(name, number, pin):
     else:
         flash(f"Error: Number not verified: {response.pin_error}")
     conn.close()
+
+@app.route('/start', methods=['GET', 'POST'])
+def start_exchange():
+   if request.method == 'GET':
+       pass
+   else:
+       assign_gifts()
+       send_details()
+   return render_template('start.html')
+
+def assign_gifts():
+    conn = sqlite3.connect('database.db')
+    cur = conn.cursor()
+
+    cur.execute("SELECT id FROM people")
+    people = cur.fetchall()
+
+    for index in range(len(people)):
+        person_id = people[index][0]
+        # Get the next person's ID and wrap around
+        giftee_id = people[(index + 1) % len(people)][0]
+
+        cur.execute(f"""
+            UPDATE people SET giftee = {giftee_id} WHERE id = {person_id}
+        """)
+
+    conn.commit()
+    conn.close()
+
+def send_details():
+    conn = sqlite3.connect('database.db')
+    channel = SMSChannel.from_env()
+
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT p1.phone_number, p2.name 
+        FROM people p1
+        JOIN people p2 ON p1.giftee = p2.id
+    """)
+    results = cur.fetchall()
+
+    # Send a message to everyone with their 
+    for result in results:
+        buyer = result[0]
+        giftee = result[1]
+        text = f"You are buying a gift for {giftee}"
+        sms_response = channel.send_sms_message({
+            'messages': [{
+                'from': 'Gift Exchange app',
+                'text': text,
+                'destinations': [{
+                    'to': buyer
+                }],
+            }]
+        })
+
+    conn.close()
