@@ -143,7 +143,7 @@ def send_details():
     """)
     results = cur.fetchall()
 
-    # Send a message to everyone with their 
+    # Send a message to everyone with their giftee's name
     for result in results:
         buyer = result[0]
         giftee = result[1]
