@@ -159,3 +159,52 @@ def send_details():
         })
 
     conn.close()
+
+@app.route('/confirm', methods=['GET', 'POST'])
+def confirm_gift():
+   if request.method == 'GET':
+       pass
+   else:
+        name = request.form.get('name')
+        if not name:
+           flash("Please enter your name.")
+        else: 
+            confirm_gift_bought(name)
+   return render_template('confirm.html')
+
+def confirm_gift_bought(name):
+    conn = sqlite3.connect('database.db')
+    channel = SMSChannel.from_env()
+    cur = conn.cursor()
+
+    # Update the gift_bought field for the person to 1
+    cur.execute(f"""
+        UPDATE people
+        SET gift_bought = 1
+        WHERE name = '{name}';
+    """)
+    conn.commit()
+
+    cur.execute("SELECT name, phone_number, gift_bought FROM people;")
+    people = cur.fetchall()
+    gifts_bought = 0
+
+    for person in people:
+        if person[2] == 1:  # Check if gift_bought is 1
+            gifts_bought += 1
+
+    if gifts_bought == len(people):
+        print("Everyone bought their gift!")
+        for person in people:
+            phone_number = person[1]
+            sms_response = channel.send_sms_message({
+                'messages': [{
+                    'from': 'Gift Exchange app',
+                    'text': "Everyone bought their gift! Time to meet up and exchange!",
+                    'destinations': [{
+                        'to': phone_number
+                    }],
+                }]
+            })
+
+    conn.close()
