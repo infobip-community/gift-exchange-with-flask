@@ -121,7 +121,8 @@ def assign_gifts():
     for index in range(len(people)):
         person_id = people[index][0]
         # Get the next person's ID and wrap around
-        giftee_id = people[(index + 1) % len(people)][0]
+        next_index = (index + 1) % len(people)
+        giftee_id = people[next_index][0]
 
         cur.execute(f"""
             UPDATE people SET giftee = {giftee_id} WHERE id = {person_id}
