@@ -1,9 +1,8 @@
-# gift-exchange-with-flask
-A web app which allows users to register for a gift exchange, assigns gifting relationships, and notifies users when the exchange can take place.
-
 # **Co-ordinating a gift exchange with Flask and Infobip**
 
-Source code for web app made with Flask and the [Infobip Python SDK](https://github.com/infobip-community/infobip-api-python-sdk) which allows users to register for a gift exchange, assigns gifting relationships, and notifies users when the exchange can take place.
+A web app which allows users to register for a gift exchange, assigns gifting relationships, and notifies users when the exchange can take place.
+
+Source code for web app made with Flask and the [Infobip Python SDK](https://github.com/infobip-community/infobip-api-python-sdk).
 
 ## Pre-requisites
 
