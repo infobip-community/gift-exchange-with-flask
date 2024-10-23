@@ -31,7 +31,7 @@ flask run
 
 ## Following along
 
-Each step of this guide is its own blog post and [**a branch in this repo](https://github.com/infobip-community/gift-exchange-with-flask/branches):**
+Each step of this guide is its own blog post and [a branch in this repo](https://github.com/infobip-community/gift-exchange-with-flask/branches):
 
 - [Part 1](https://www.infobip.com/developers/blog/co-ordinating-a-gift-exchange-with-flask-and-infobip-part-1) covers building an app where users can enter their names and phone numbers, and the code is in [step-1](https://github.com/infobip-community/gift-exchange-with-flask/tree/step-1).
 - [Part 2](https://www.infobip.com/developers/blog/co-ordinating-a-gift-exchange-with-flask-and-infobip-part-2) covers adding a database to the app to store the participant’s names and phone numbers, and the code is in [step-2](https://github.com/infobip-community/gift-exchange-with-flask/tree/step-2).
