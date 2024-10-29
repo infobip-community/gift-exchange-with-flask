@@ -171,6 +171,7 @@ def confirm_gift():
            flash("Please enter your name.")
         else: 
             confirm_gift_bought(name)
+            flash(f"Thanks for confirming! You'll receive a text when everyone else has done so.")
    return render_template('confirm.html')
 
 def confirm_gift_bought(name):
